@@ -2,11 +2,11 @@
 
 [日本語版はこちら / Japanese version below](#日本語版)
 
-An MCP server that orchestrates multiple LLMs (AWS Bedrock, OpenRouter, Ollama) based on Consensus Protocol v2, enabling mutual evaluation and consensus formation.
+An MCP server that orchestrates multiple LLMs (AWS Bedrock, OpenRouter, Ollama) based on [Consensus Protocol v2](doc/consensus-protocol-v2.md), enabling mutual evaluation and consensus formation.
 
 ## Features
 
-- **Consensus Protocol v2**: Automated generation, mutual evaluation, and consensus formation across multiple LLMs
+- **[Consensus Protocol v2](doc/consensus-protocol-v2.md)**: Automated generation, mutual evaluation, and consensus formation across multiple LLMs
 - **Map-Reduce Processing**: Split and process large documents exceeding context windows
 - **Persona-based Agent Ensemble**: Assign different personas (e.g., Critical, Creative) to a single model to simulate multi-agent discussion
 - **Multi-Provider Support**: AWS Bedrock, OpenRouter, and Ollama
@@ -279,11 +279,11 @@ rm -f consensus.db
 
 # 日本語版
 
-複数のLLM（AWS Bedrock、OpenRouter、Ollama）をConsensus Protocol v2に基づいてオーケストレーションし、相互評価による合意形成を行うMCPサーバーです。
+複数のLLM（AWS Bedrock、OpenRouter、Ollama）を[Consensus Protocol v2](doc/consensus-protocol-v2-ja.md)に基づいてオーケストレーションし、相互評価による合意形成を行うMCPサーバーです。
 
 ## 機能
 
-- **Consensus Protocol v2**: 複数LLMによる生成、相互評価、合意形成のプロセスを自動化
+- **[Consensus Protocol v2](doc/consensus-protocol-v2-ja.md)**: 複数LLMによる生成、相互評価、合意形成のプロセスを自動化
 - **Map-Reduce処理**: Context Windowを超える長文ドキュメントの分割処理と統合
 - **Persona-based Agent Ensemble**: 単一モデルに異なるペルソナ（批判的、創造的など）を割り当て、複数エージェント間の議論をシミュレート
 - **マルチプロバイダー対応**: AWS Bedrock、OpenRouter、Ollamaをサポート
