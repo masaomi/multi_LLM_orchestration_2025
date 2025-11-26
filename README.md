@@ -8,6 +8,7 @@ An MCP server that orchestrates multiple LLMs (AWS Bedrock, OpenRouter, Ollama) 
 
 - **Consensus Protocol v2**: Automated generation, mutual evaluation, and consensus formation across multiple LLMs
 - **Map-Reduce Processing**: Split and process large documents exceeding context windows
+- **Persona-based Agent Ensemble**: Assign different personas (e.g., Critical, Creative) to a single model to simulate multi-agent discussion
 - **Multi-Provider Support**: AWS Bedrock, OpenRouter, and Ollama
 - **SQLite History Management**: Store all sessions, responses, evaluations, and chunks in local database
 
@@ -55,6 +56,23 @@ OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODELS=qwen3:8b,mistral:latest
 
 # Settings
+MAX_ITERATIONS=3
+CONSENSUS_THRESHOLD=0.75
+PARALLEL_EXECUTION=true
+```
+
+#### .env Example (Persona Mode)
+```env
+# Use a single model (e.g., Ollama) to simulate multiple personas
+OLLAMA_BASE_URL=http://localhost:11434
+# No need to set OLLAMA_MODELS if using Persona Mode exclusively
+
+# Persona Settings
+PERSONAS=critical,creative,pragmatic
+PERSONA_BASE_PROVIDER=ollama
+PERSONA_BASE_MODEL=llama3.1
+
+# Orchestration Settings
 MAX_ITERATIONS=3
 CONSENSUS_THRESHOLD=0.75
 PARALLEL_EXECUTION=true
@@ -265,6 +283,7 @@ rm -f consensus.db
 
 - **Consensus Protocol v2**: 複数LLMによる生成、相互評価、合意形成のプロセスを自動化
 - **Map-Reduce処理**: Context Windowを超える長文ドキュメントの分割処理と統合
+- **Persona-based Agent Ensemble**: 単一モデルに異なるペルソナ（批判的、創造的など）を割り当て、複数エージェント間の議論をシミュレート
 - **マルチプロバイダー対応**: AWS Bedrock、OpenRouter、Ollamaをサポート
 - **SQLite履歴管理**: 全てのセッション、応答、評価、チャンクをローカルDBに保存
 
@@ -312,6 +331,25 @@ OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODELS=qwen3:8b,mistral:latest
 
 # 設定
+MAX_ITERATIONS=3
+CONSENSUS_THRESHOLD=0.75
+PARALLEL_EXECUTION=true
+```
+
+#### .env 設定例（ペルソナモード）
+```env
+# 単一モデル（例：Ollama）を使用して複数のペルソナをシミュレート
+OLLAMA_BASE_URL=http://localhost:11434
+# ペルソナモードのみ使用する場合、OLLAMA_MODELSの設定は不要です
+
+# ペルソナ設定
+PERSONAS=critical,creative,pragmatic
+PERSONA_BASE_PROVIDER=ollama
+PERSONA_BASE_MODEL=llama3.1
+# 利用可能なプリセット: critical, creative, pragmatic, optimistic, analytical, empathetic
+# カスタムペルソナ名も使用可能（例: "Einstein", "Steve Jobs"）
+
+# オーケストレーション設定
 MAX_ITERATIONS=3
 CONSENSUS_THRESHOLD=0.75
 PARALLEL_EXECUTION=true

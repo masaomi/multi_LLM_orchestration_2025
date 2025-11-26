@@ -2,6 +2,7 @@ import { BaseLLMProvider } from "./base-provider";
 import { BedrockProvider } from "./bedrock-provider";
 import { OpenRouterProvider } from "./openrouter-provider";
 import { OllamaProvider } from "./ollama-provider";
+import { PersonaProvider } from "./persona-provider";
 import { ConfigLoader } from "../utils/config-loader";
 import { Logger } from "../utils/logger";
 
@@ -24,6 +25,37 @@ export class ProviderFactory {
     const config = ConfigLoader.getInstance().getConfig();
     const activeModels: ActiveModel[] = [];
 
+    // Check if Persona Mode is enabled
+    if (config.personas && config.personas.enabled) {
+      Logger.info("Persona Mode Enabled. Configuring persona-based agents...");
+      const baseProviderName = config.personas.baseProvider;
+      const baseModelName = config.personas.baseModel;
+      const baseProvider = this.providers.get(baseProviderName);
+
+      if (!baseProvider || !baseProvider.isConfigured()) {
+        Logger.error(`Base provider '${baseProviderName}' for personas is not configured or not found.`);
+        // Fallback to normal mode or empty
+      } else {
+        config.personas.personas.forEach(personaName => {
+          const personaProvider = new PersonaProvider(baseProvider, personaName);
+          activeModels.push({
+            provider: personaProvider,
+            modelName: baseModelName,
+            // ID format: provider:model:persona (to ensure uniqueness)
+            // But the system uses provider:model as ID often. 
+            // PersonaProvider.name is the base provider name.
+            // We need a unique ID. Let's use a custom ID format.
+            id: `persona:${personaName}` 
+          });
+        });
+
+        if (activeModels.length > 0) {
+            return activeModels;
+        }
+      }
+    }
+
+    // Normal Mode (Existing Logic)
     // Bedrock
     if (config.providers.bedrock.enabled && this.providers.get('bedrock')?.isConfigured()) {
       config.providers.bedrock.models.forEach(model => {
@@ -64,4 +96,5 @@ export class ProviderFactory {
     return activeModels;
   }
 }
+
 
