@@ -1,7 +1,11 @@
 import dotenv from 'dotenv';
 import { AppConfig, ProviderConfig } from '../types/config';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+// Load .env from project root (handle both CJS and ES module contexts)
+const projectRoot = path.resolve(__dirname, '../..');
+dotenv.config({ path: path.join(projectRoot, '.env'), debug: true });
 
 export class ConfigLoader {
   private static instance: ConfigLoader;

@@ -5,7 +5,7 @@ async function test() {
   
   const engine = new ConsensusEngine();
   
-  const prompt = "What is the capital of France? Provide a brief explanation.";
+  const prompt = "愛とはなんですか？";
   
   console.log(`Prompt: ${prompt}\n`);
   console.log('Starting consensus process...\n');
@@ -22,7 +22,7 @@ async function test() {
     console.log('--- All Responses ---');
     result.responses.forEach((r, i) => {
       console.log(`\n[${i + 1}] ${r.provider}:${r.model}`);
-      console.log(r.content.substring(0, 200) + '...');
+      console.log(r.content);
     });
     
     console.log('\n--- Evaluations Summary ---');
