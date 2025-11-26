@@ -38,7 +38,7 @@ Copy `env.sample` to `.env` and configure:
 cp env.sample .env
 ```
 
-#### .env Example
+#### .env Example (All Providers)
 ```env
 # Configure only the providers you want to use
 
@@ -60,11 +60,49 @@ CONSENSUS_THRESHOLD=0.75
 PARALLEL_EXECUTION=true
 ```
 
+#### .env Example (Ollama Only - For Testing)
+```env
+# AWS Bedrock (disabled)
+# AWS_REGION=us-east-1
+# BEDROCK_MODELS=
+
+# OpenRouter (disabled)
+# OPENROUTER_API_KEY=
+# OPENROUTER_MODELS=
+
+# Ollama Settings (for testing)
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODELS=qwen3:8b,mistral:latest
+
+# Orchestration Settings
+MAX_ITERATIONS=2
+CONSENSUS_THRESHOLD=0.75
+PARALLEL_EXECUTION=true
+DEBUG=true
+```
+
 ## Client Integration
 
 ### Cursor Integration
 
-Add to `cursor_mcp_config.json` (or Cursor settings):
+**Option 1: Using .env file (Recommended)**
+
+Add to Cursor's MCP settings. The server will automatically load settings from `.env` file:
+
+```json
+{
+  "mcpServers": {
+    "multi-llm": {
+      "command": "node",
+      "args": ["/absolute/path/to/multi_LLM_orchestration_2025/dist/server.js"]
+    }
+  }
+}
+```
+
+**Option 2: Explicit environment variables**
+
+Or specify environment variables directly in the configuration:
 
 ```json
 {
@@ -76,7 +114,9 @@ Add to `cursor_mcp_config.json` (or Cursor settings):
         "OLLAMA_BASE_URL": "http://localhost:11434",
         "OLLAMA_MODELS": "qwen3:8b,mistral:latest",
         "MAX_ITERATIONS": "2",
-        "CONSENSUS_THRESHOLD": "0.75"
+        "CONSENSUS_THRESHOLD": "0.75",
+        "PARALLEL_EXECUTION": "true",
+        "DEBUG": "true"
       }
     }
   }
@@ -255,7 +295,7 @@ cd ../../../../..
 cp env.sample .env
 ```
 
-#### .env 設定例
+#### .env 設定例（全プロバイダー）
 ```env
 # 使用したいプロバイダーのみ設定してください
 
@@ -277,11 +317,49 @@ CONSENSUS_THRESHOLD=0.75
 PARALLEL_EXECUTION=true
 ```
 
+#### .env 設定例（Ollamaのみ - テスト用）
+```env
+# AWS Bedrock (使用しない)
+# AWS_REGION=us-east-1
+# BEDROCK_MODELS=
+
+# OpenRouter (使用しない)
+# OPENROUTER_API_KEY=
+# OPENROUTER_MODELS=
+
+# Ollama Settings (テスト用)
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODELS=qwen3:8b,mistral:latest
+
+# Orchestration Settings
+MAX_ITERATIONS=2
+CONSENSUS_THRESHOLD=0.75
+PARALLEL_EXECUTION=true
+DEBUG=true
+```
+
 ## クライアントへの統合
 
 ### Cursorへの統合
 
-`cursor_mcp_config.json` (または Cursorの設定画面) に以下を追加します：
+**方法1: .envファイルを使用（推奨）**
+
+Cursorの MCP 設定に以下を追加します。サーバーは自動的に`.env`ファイルから設定を読み込みます：
+
+```json
+{
+  "mcpServers": {
+    "multi-llm": {
+      "command": "node",
+      "args": ["/absolute/path/to/multi_LLM_orchestration_2025/dist/server.js"]
+    }
+  }
+}
+```
+
+**方法2: 環境変数を明示的に指定**
+
+または、設定内で環境変数を直接指定することもできます：
 
 ```json
 {
@@ -293,7 +371,9 @@ PARALLEL_EXECUTION=true
         "OLLAMA_BASE_URL": "http://localhost:11434",
         "OLLAMA_MODELS": "qwen3:8b,mistral:latest",
         "MAX_ITERATIONS": "2",
-        "CONSENSUS_THRESHOLD": "0.75"
+        "CONSENSUS_THRESHOLD": "0.75",
+        "PARALLEL_EXECUTION": "true",
+        "DEBUG": "true"
       }
     }
   }
