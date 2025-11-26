@@ -67,8 +67,10 @@ PARALLEL_EXECUTION=true
 OLLAMA_BASE_URL=http://localhost:11434
 # No need to set OLLAMA_MODELS if using Persona Mode exclusively
 
-# Persona Settings
-PERSONAS=critical,creative,pragmatic
+# Persona Settings (use semicolon as delimiter)
+PERSONAS=critical;creative;Einstein
+# You can also use detailed descriptions:
+# PERSONAS=critical;creative;物理学者で捻くれ者で、常に斜め上からの視点で物事を考える変態
 PERSONA_BASE_PROVIDER=ollama
 PERSONA_BASE_MODEL=llama3.1
 
@@ -342,12 +344,13 @@ PARALLEL_EXECUTION=true
 OLLAMA_BASE_URL=http://localhost:11434
 # ペルソナモードのみ使用する場合、OLLAMA_MODELSの設定は不要です
 
-# ペルソナ設定
-PERSONAS=critical,creative,pragmatic
+# ペルソナ設定（セミコロン区切り）
+PERSONAS=critical;creative;Einstein
+# 利用可能なプリセット: critical, creative, pragmatic, optimistic, analytical, empathetic
+# カスタムペルソナ名や詳細な説明も使用可能：
+# PERSONAS=critical;creative;物理学者で捻くれ者で、常に斜め上からの視点で物事を考える変態
 PERSONA_BASE_PROVIDER=ollama
 PERSONA_BASE_MODEL=llama3.1
-# 利用可能なプリセット: critical, creative, pragmatic, optimistic, analytical, empathetic
-# カスタムペルソナ名も使用可能（例: "Einstein", "Steve Jobs"）
 
 # オーケストレーション設定
 MAX_ITERATIONS=3

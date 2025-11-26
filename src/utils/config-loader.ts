@@ -54,7 +54,8 @@ export class ConfigLoader {
 
   private loadPersonaConfig(): PersonaConfig {
     const personasStr = process.env.PERSONAS;
-    const personas = personasStr ? personasStr.split(',').map(p => p.trim()).filter(p => p.length > 0) : [];
+    // Use semicolon as delimiter to allow commas in custom persona descriptions
+    const personas = personasStr ? personasStr.split(';').map(p => p.trim()).filter(p => p.length > 0) : [];
     
     return {
       enabled: personas.length > 0,
