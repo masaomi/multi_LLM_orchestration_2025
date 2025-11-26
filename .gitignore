@@ -4,4 +4,5 @@ dist
 .DS_Store
 command.log
 consensus.db
+data
 
